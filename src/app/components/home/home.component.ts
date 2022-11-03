@@ -54,4 +54,11 @@ export class HomeComponent implements OnInit {
     this.closeBtn.nativeElement.click();
   }
 
+  delete(id:String) {
+    if(confirm("¿Seguro que desea eliminar el cliente?")){
+      this.productService.deleteProduct(id);
+      this.ngOnInit();
+    }
+  }
+
 }

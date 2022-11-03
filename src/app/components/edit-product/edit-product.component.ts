@@ -30,6 +30,18 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params["id"];
+    this.productService.getProductById(this.id).subscribe( product => {
+      product.expiration = this.productService.flipDate( this.productService.timestampToDate(product.expiration));
+      this.product = product;
+    });
   }
+
+  save({value, valid} : {value:Product , valid:boolean}) {
+    value.id = this.id;
+    this.productService.updateProduct(value);
+    this.router.navigate(["/"]);
+  }
+
+  
 
 }

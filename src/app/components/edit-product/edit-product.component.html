@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>
+                <i class="fa-solid fa-store"></i>Editar producto
+            </h1>
+        </div>
+    </div>
+</div>
+
+<section id="actions" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a routerLink="/" class="btn btn-light btn-block">
+                    <i class="fas fa-arrow-left"></i> Regresar
+                </a>
+            </div>
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success btn-block">
+                    <i class="fas fa-check"></i> Guardar producto
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<form #productForm="ngForm" (submit)="save(productForm.form)">
+    <section id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Editar el producto</h4>
+                        </div>
+    
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Nombre producto</label>
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    class="form-control" 
+                                    placeholder="Nombre del producto"
+                                    required 
+                                    minlength="2" 
+                                    #name="ngModel" 
+                                    [(ngModel)]="product.name" 
+                                    [ngClass]="{'is-invalid': name.errors && name.touched}">
+                                    <div class="invalid-feedback" [hidden]="!name.errors?.['required']">
+                                        Debe ingresar el nombre del producto
+                                    </div>
+                                    <div class="invalid-feedback" [hidden]="!name.errors?.['minlength']">
+                                        El nombre del producto debe tener al menos 2 caracteres
+                                    </div>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="expiration">Caducidad</label>
+                                <input 
+                                    type="date" 
+                                    name="expiration" 
+                                    class="form-control"
+                                    required
+                                    #expiration="ngModel" 
+                                    [(ngModel)]="product.expiration" 
+                                    [ngClass]="{'is-invalid': expiration.errors && expiration.touched}">
+                                    <div class="invalid-feedback" [hidden]="!expiration.errors?.['required']">
+                                        Debe ingresar la fecha de caducidad
+                                    </div>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="quantity">Cantidad</label>
+                                <input 
+                                    type="number" 
+                                    name="quantity" 
+                                    class="form-control"
+                                    pattern="^[0-9]+"
+                                    required
+                                    #quantity="ngModel" 
+                                    [(ngModel)]="product.quantity" 
+                                    [ngClass]="{'is-invalid': quantity.errors && quantity.touched}">
+                                    <div class="invalid-feedback" [hidden]="!quantity.errors?.['required']">
+                                        Debe ingresar la cantidad del producto
+                                    </div>
+                                    <div class="invalid-feedback" [hidden]="!quantity.errors?.['pattern']">
+                                        La cantidad mínima es 0, debe introducir sólo números enteros positivos
+                                    </div>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="price">Precio</label>
+                                <input 
+                                    type="number" 
+                                    name="price" 
+                                    class="form-control" 
+                                    required 
+                                    min="0.5"
+                                    #price="ngModel" 
+                                    [(ngModel)]="product.price" 
+                                    [ngClass]="{'is-invalid': price.errors && price.touched}">
+                                    <div class="invalid-feedback" [hidden]="!price.errors?.['required']">
+                                        Debe ingresar el precio del producto
+                                    </div>
+                                    <div class="invalid-feedback" [hidden]="!price.errors?.['min']">
+                                        El precio mínimo del producto debe ser de 0.5
+                                    </div>
+                            </div>
+                    
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
